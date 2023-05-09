@@ -1,0 +1,32 @@
+{
+    "name": "baloniy/lorem-ipsum-bundle",
+    "description": "Happy lorem ipsum",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Baloniy\\LoremIpsumBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Baloniy\\LoremIpsumBundle\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andrii Stadniichuk",
+            "email": "andreybaloniy@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "symfony/config": "^6.2",
+        "symfony/dependency-injection": "^6.2",
+        "symfony/http-kernel": "^6.2"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^6.2",
+        "symfony/framework-bundle": "^6.2"
+    }
+}

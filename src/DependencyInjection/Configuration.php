@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Baloniy\LoremIpsumBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -7,7 +9,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 class Configuration implements ConfigurationInterface
 {
-
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('baloniy_lorem_ipsum');
@@ -22,7 +23,6 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue(3)
                     ->info('How much do you like sunshine?')
                     ->end()
-                ->scalarNode('word_provider')->defaultNull()->end()
             ->end();
 
         return $treeBuilder;

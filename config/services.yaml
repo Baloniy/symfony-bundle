@@ -1,13 +1,17 @@
 services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
   baloniy_lorem_ipsum.baloniy_ipsum:
     class: Baloniy\LoremIpsumBundle\BaloniyIpsum
     public: true
     arguments:
-      [ '@?', '@?', '@baloniy_lorem_ipsum.word_provider' ]
+      []
 
   baloniy_lorem_ipsum.baloniy_word_provider:
     class: Baloniy\LoremIpsumBundle\BaloniyWordProvider
-    public: false
+    tags: ['baloniy_ipsum_word_provider']
 
   Baloniy\LoremIpsumBundle\BaloniyIpsum:
     alias: 'baloniy_lorem_ipsum.baloniy_ipsum'
@@ -15,3 +19,8 @@ services:
 
   baloniy_lorem_ipsum.word_provider:
     alias: 'baloniy_lorem_ipsum.baloniy_word_provider'
+
+  Baloniy\LoremIpsumBundle\Controller\IpsumApiController:
+    public: true
+    arguments:
+      ['@baloniy_lorem_ipsum.baloniy_ipsum']

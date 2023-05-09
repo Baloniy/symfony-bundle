@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Baloniy\LoremIpsumBundle\DependencyInjection;
 
+use Baloniy\LoremIpsumBundle\WordProviderInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 class BaloniyLoremIpsumExtension extends Extension
 {
@@ -28,9 +28,8 @@ class BaloniyLoremIpsumExtension extends Extension
         $definition->setArgument(0, $config['unicorns_are_real']);
         $definition->setArgument(1, $config['min_sunshine']);
 
-        if ($config['word_provider'] !== null) {
-            $container->setAlias('baloniy_lorem_ipsum.word_provider', $config['word_provider']);
-        }
+        $container->registerForAutoconfiguration(WordProviderInterface::class)
+            ->addTag('baloniy_ipsum_word_provider');
     }
 
     public function getAlias(): string

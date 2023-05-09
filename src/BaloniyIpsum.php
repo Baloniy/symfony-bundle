@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Baloniy\LoremIpsumBundle;
 
-readonly class BaloniyIpsum
+class BaloniyIpsum
 {
     public function __construct(
         private bool $unicornsAreReal,
         private int  $minSunshine,
-        private WordProviderInterface $wordProvider
+        /** WordProviderInterface[] */
+        private array $wordProviders,
+        private ?array $wordList = null
     ) {
     }
 
@@ -152,6 +154,20 @@ readonly class BaloniyIpsum
 
     private function getWordList(): array
     {
-        return $this->wordProvider->getWordList();
+        if (null === $this->wordList) {
+            $words = [];
+
+            foreach ($this->wordProviders as $wordProvider) {
+                $words = array_merge($words, $wordProvider->getWordList());
+            }
+
+            if (count($words) <= 1) {
+               throw new \Exception('Word list must contain at least 2 words, yo!');
+            }
+
+            $this->wordList = $words;
+        }
+
+        return $this->wordList;
     }
 }

@@ -1,0 +1,3 @@
+baloniy_lorem_ipsum_api:
+  path: /
+  controller: Baloniy\LoremIpsumBundle\Controller\IpsumApiController::index
